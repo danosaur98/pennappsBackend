@@ -15,7 +15,8 @@ mongo = PyMongo(app)
 def add_lottery():
     lotteries = mongo.db.lotteries
     lotteries.insert_one(
-        {'id': uuid.uuid4(), 'title': request.args.get("name"), 'total': request.args.get("amount"), 'endtime': request.args.get("endtime"),
+        {'id': str(uuid.uuid4()), 'title': request.args.get("name"), 'total': request.args.get("amount"),
+         'endtime': request.args.get("endtime"),
          'participants': {request.args.get("ID"): request.args.get("amount")}})
     return jsonify({'result': request.args})
 
@@ -27,16 +28,27 @@ def get_all_articles():
     output = []
     for q in lotteries.find():
         output.append({'id': q['id'],
-                        'title': q['title'],
+                       'title': q['title'],
                        'total': q['total'],
                        'participants': q['participants']})
 
     return jsonify({'result': output})
 
+
 @app.route('/joinLottery', methods=['POST'])
 def joinLottery():
     lotteries = mongo.db.lotteries
+    l = lotteries.find_one({'id': request.args.get('id')})
+    for l in lotteries.find():
+        print(l)
+    lotteries.update(
+        {"id": request.args.get['id']},
+        {
+            '$set': {
 
+            }
+        }
+    )
 
 
 @app.route("/")
