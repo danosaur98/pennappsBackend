@@ -26,7 +26,8 @@ def get_all_articles():
 
     output = []
     for q in lotteries.find():
-        output.append({'title': q['title'],
+        output.append({'id': q['id'],
+                        'title': q['title'],
                        'total': q['total'],
                        'participants': q['participants']})
 
