@@ -38,17 +38,19 @@ def get_lotteries():
 @app.route('/joinLottery', methods=['POST'])
 def joinLottery():
     lotteries = mongo.db.lotteries
-    l = lotteries.find_one({'id': request.args.get('id')})
+    l = lotteries.find_one({'lotteryID': request.args.get('lotteryID')})
     participants = l['participants']
     participants[request.args.get('participantID')] = request.args.get('contribution')
     lotteries.update(
-        {"id": request.args.get['id']},
+        {"lotteryID": request.args.get('lotteryID')},
         {
             '$set': {
                 'participants' :participants
             }
         }
     )
+    output = "Successfully joined!"
+    return jsonify({"result": output})
 
 
 @app.route("/")
