@@ -1,3 +1,5 @@
+import uuid
+
 from flask import Flask, jsonify, request
 from flask_pymongo import PyMongo, ObjectId
 
@@ -13,7 +15,7 @@ mongo = PyMongo(app)
 def add_lottery():
     lotteries = mongo.db.lotteries
     lotteries.insert_one(
-        {'title': request.args.get("name"), 'total': request.args.get("amount"), 'endtime': request.args.get("endtime"),
+        {'id': uuid.uuid4(), 'title': request.args.get("name"), 'total': request.args.get("amount"), 'endtime': request.args.get("endtime"),
          'participants': {request.args.get("ID"): request.args.get("amount")}})
     return jsonify({'result': request.args})
 
@@ -30,10 +32,15 @@ def get_all_articles():
 
     return jsonify({'result': output})
 
+@app.route('/joinLottery', methods=['POST'])
+def joinLottery():
+    lotteries = mongo.db.lotteries
+
+
 
 @app.route("/")
 def home():
-    return "Hello World!"
+    return "Ayy lmao!"
 
 
 if __name__ == '__main__':
