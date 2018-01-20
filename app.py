@@ -16,7 +16,7 @@ def add_lottery():
     lotteries = mongo.db.lotteries
     lotteries.insert_one(
         {'lotteryID': str(uuid.uuid4()), 'title': request.args.get("name"), 'total': request.args.get("amount"),
-         'endtime': request.args.get("endtime"),
+         'endtime': request.args.get("endtime"), 'charity': request.args.get("charity"), 'endDate': request.args.get("endDate"),
          'participants': {request.args.get("participantID"): request.args.get("amount")}})
     return jsonify({'result': request.args})
 
@@ -30,7 +30,9 @@ def get_lotteries():
         output.append({'lotteryID': q['lotteryID'],
                        'title': q['title'],
                        'total': q['total'],
-                       'participants': q['participants']})
+                       'participants': q['participants'],
+                       'charity': q['charity'],
+                       'endDate': q['endDate']})
 
     return jsonify({'result': output})
 
