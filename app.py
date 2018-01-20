@@ -40,12 +40,12 @@ def joinLottery():
     lotteries = mongo.db.lotteries
     l = lotteries.find_one({'id': request.args.get('id')})
     participants = l['participants']
-    participants
+    participants[request.args.get('participantID')] = request.args.get('contribution')
     lotteries.update(
         {"id": request.args.get['id']},
         {
             '$set': {
-
+                'participants' :participants
             }
         }
     )
