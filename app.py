@@ -17,7 +17,7 @@ def add_lottery():
     lotteries.insert_one(
         {'lotteryID': str(uuid.uuid4()), 'title': request.args.get("name"), 'total': request.args.get("total"),
          'endtime': request.args.get("endtime"), 'charity': request.args.get("charity"), 'endDate': request.args.get("endDate"),
-         'participants': {request.args.get("participantID"): request.args.get("amount")}})
+         'participants': {request.args.get("participantID"): request.args.get("total")}})
     return jsonify({'result': request.args})
 
 
