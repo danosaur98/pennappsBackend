@@ -87,22 +87,24 @@ def get_funds():
     output = {"bank": u['bank'], "donated": u['donated']}
     return jsonify(output)
 
+
 @app.route('/updateFunds', methods=['POST'])
 def update_funds():
     users = mongo.db.users
     u = users.find_one({'participantID': request.args.get('participantID')})
-    new_bank_amount = str(u['bank'] + float(request.args.get('bankToBeAdded')))
-    new_donated_amount =  str(u['bank'] + float(request.args.get('donatedToBeAdded')))
+    new_bank_amount = str(float(u['bank']) + float(request.args.get('bankToBeAdded')))
+    new_donated_amount = str(float(u['bank']) + float(request.args.get('donatedToBeAdded')))
     users.update(
         {"participantID": request.args.get('participantID')},
         {
             '$set': {
                 'bank': new_bank_amount,
-                'donated' : new_donated_amount
+                'donated': new_donated_amount
             }
         }
     )
-    output = {}
+    output = {'bank': new_bank_amount,
+                'donated': new_donated_amount}
     return jsonify(output)
 
 
