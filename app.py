@@ -1,4 +1,5 @@
 import uuid
+import random
 
 from flask import Flask, jsonify, request
 from flask_pymongo import PyMongo, ObjectId
@@ -48,12 +49,33 @@ def joinLottery():
         {"lotteryID": request.args.get('lotteryID')},
         {
             '$set': {
-                'participants' : participants,
+                'participants': participants,
                 'total': total
             }
         }
     )
     output = "Successfully joined!"
+    return jsonify({"result": output})
+
+
+@app.route('/decideWinner', methods=['GET'])
+def decideWinner():
+    lotteries = mongo.db.lotteries
+    l = lotteries.find_one({'lotteryID': request.args.get('lotteryID')})
+    participants = l['participants']
+    total = int(l['total'])
+    winning_number = random.randint(0, total)
+    winner = ""
+    summed = 0
+    for p in participants:
+        if summed < winning_number <= summed + int(participants[p]):
+            winner = p
+            break
+        else:
+            summed += int(participants[p])
+    amountWon = round(0.95 * total, 2)
+    amountDonated = round(0.05 * total, 2)
+    output = {"winner": winner, "amountWon": amountWon, "amountDonated": amountDonated}
     return jsonify({"result": output})
 
 

@@ -4,11 +4,10 @@
     "first_name": "Kris",
     "last_name": "Gaylord",
     "address": {
-      "street_number": "308",
-      "street_name": "Breeden Creek",
-      "city": "Breeden",
-      "state": "West Virginia",
-      "zip": "25666"
+      "street_number": "239",
+      "street_name": "Putnam Road",
+      "city": "Philadelphia",
+      "zip": "83023"
     }
   },
   {
@@ -33,5 +32,48 @@
       "city": "",
       "state": ""
     }
+  },
+  {
+    "_id": "5a6436756514d52c7774a7e0",
+    "first_name": "Daniel",
+    "last_name": "Zhou",
+    "address": {
+      "street_number": "123",
+      "street_name": "Rainbow Road",
+      "city": "Durham",
+      "state": "NC",
+      "zip": "27708"
+    }
+  },
+  {
+    "_id": "5a6436b96514d52c7774a7e1",
+    "first_name": "Ryan",
+    "last_name": "Guan",
+    "address": {
+      "street_number": "321",
+      "street_name": "Baker Street",
+      "city": "Philadelphia",
+      "state": "PA",
+      "zip": "12345"
+    }
   }
 ]
+
+[
+  {
+    "_id": "5a6444e06514d52c7774a7e8",
+    "type": "Credit Card",
+    "nickname": "string",
+    "rewards": 0,
+    "balance": 500,
+    "customer_id": "5a6436756514d52c7774a7e0"
+  },
+  {
+    "_id": "5a6444eb6514d52c7774a7e9",
+    "type": "Credit Card",
+    "nickname": "string",
+    "rewards": 0,
+    "balance": 500,
+    "customer_id": "5a6436b96514d52c7774a7e1"
+  }
+]]
