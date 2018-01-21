@@ -15,8 +15,9 @@ mongo = PyMongo(app)
 @app.route("/addLottery", methods=['POST'])
 def add_lottery():
     lotteries = mongo.db.lotteries
+    lotteryID = str(uuid.uuid4())
     lotteries.insert_one(
-        {'lotteryID': str(uuid.uuid4()), 'title': request.args.get("name"), 'total': request.args.get("total"),
+        {'lotteryID': lotteryID, 'title': request.args.get("name"), 'total': request.args.get("total"),
          'charity': request.args.get("charity"), 'endDate': request.args.get("endDate"),
          'participants': {request.args.get("participantID"): request.args.get("total")}})
     return jsonify({'result': request.args})
