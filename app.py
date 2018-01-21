@@ -77,7 +77,7 @@ def decideWinner():
     amountWon = round(0.95 * total, 2)
     amountDonated = round(0.05 * total, 2)
     output = {"winner": winner, "amountWon": amountWon, "amountDonated": amountDonated}
-    return jsonify({"result": output})
+    return jsonify(output)
 
 
 @app.route("/")
