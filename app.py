@@ -43,11 +43,13 @@ def joinLottery():
     l = lotteries.find_one({'lotteryID': request.args.get('lotteryID')})
     participants = l['participants']
     participants[request.args.get('participantID')] = request.args.get('contribution')
+    total = str(int(l['total']) + int(request.args.get('contribution')))
     lotteries.update(
         {"lotteryID": request.args.get('lotteryID')},
         {
             '$set': {
-                'participants' :participants
+                'participants' : participants,
+                'total': total
             }
         }
     )
